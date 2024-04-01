@@ -7,14 +7,13 @@ discord: jankubat_13826
 """
 
 #TODO   Naimportovat zadane soubory
+import task_template
 
 #TODO   Vyzadani si od uzivatele prihlasovaci jmeno a heslo
+username = input('username: ')
+password = input('password: ')
 
-#TODO   Zjistit, jestli zadane udaje odpovidaji nekomu z registrovanych uzivatelu
-
-#TODO   Pokud je registrovany, pozdrav jej a umozni mu analyzovat texty
-
-#TODO   Pokud neni registrovany, upozorni jej a ukonci program
+#   Registrovani uzivatele
 
 """
 +------+-------------+
@@ -26,6 +25,26 @@ discord: jankubat_13826
 | liz  |   pass123   |
 +------+-------------+
 """
+#TODO   Vytvorit promennou 'registered_users' jako dictationary
+registered_users = {
+    'bob': '123',
+    'ann': 'pass123',
+    'mike': 'password123',
+    'liz': 'pass123'
+}
+
+if username in registered_users.items():
+    print(username)
+
+#for username_present in registered_users:
+#    if 
+
+
+#TODO   Zjistit, jestli zadane udaje odpovidaji nekomu z registrovanych uzivatelu
+
+#TODO   Pokud je registrovany, pozdrav jej a umozni mu analyzovat texty
+
+#TODO   Pokud neni registrovany, upozorni jej a ukonci program
 
 #TODO   Vytvorit promennou 'TEXTS', ve ktere budou ulozene jednotlive texty
 

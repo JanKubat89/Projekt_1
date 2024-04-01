@@ -64,7 +64,10 @@ else:
 
 selected_text = input('Enter a number btw. 1 and 3 to select: ')
 
-if not selected_text.isdigit() or int(selected_text) not in range(1, 4):
+if not selected_text.isdigit():
+    print('You have not entered a number')
+    print('Terminating the program..')
+elif selected_text not in range(1, 4):
     print('You have not entered numbers between 1 to 3')
     print('Terminating the program..')
 else:

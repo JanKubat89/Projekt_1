@@ -33,24 +33,44 @@ registered_users = {
     'liz': 'pass123'
 }
 
-if username in registered_users.items():
-    print(username)
 
-#for username_present in registered_users:
-#    if 
+
+    
 
 
 #TODO   Zjistit, jestli zadane udaje odpovidaji nekomu z registrovanych uzivatelu
-
 #TODO   Pokud je registrovany, pozdrav jej a umozni mu analyzovat texty
-
 #TODO   Pokud neni registrovany, upozorni jej a ukonci program
 
+if username in registered_users.keys():
+    if password in registered_users[username]:
+        print(
+'''
+----------------------------------------
+Welcome to the app, bob
+We have 3 texts to be analyzed.
+----------------------------------------
+'''
+        )
+    else:
+        print('unregistered user, terminating the program..')
+else:
+    print('unregistered user, terminating the program..')
+
+
 #TODO   Vytvorit promennou 'TEXTS', ve ktere budou ulozene jednotlive texty
-
 #TODO   Pokud uzivatel vybere takové cislo textu, ktere neni v zadani, program jej upozorni a skonci,
-
 #TODO   Pokud uzivatel zada jiny vstup nez cislo, program jej rovnez upozorni a skonci
+
+selected_text = input('Enter a number btw. 1 and 3 to select: ')
+
+if not selected_text.isdigit() or int(selected_text) not in range(1, 4):
+    print('You have not entered numbers between 1 to 3')
+    print('Terminating the program..')
+else:
+    print(selected_text)
+
+
 
 #   Pro vybraný text spočítá následující statistiky
 

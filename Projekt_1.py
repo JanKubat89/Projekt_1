@@ -1,3 +1,5 @@
+# Hlavicka projektu
+# -----------------
 #TODO   Vytvorit hlavicku
 """
 Projekt_1.py: první projekt do Engeto Online Python Akademie
@@ -6,14 +8,16 @@ email: hanys.jan.kubat@gmail.com
 discord: jankubat_13826
 """
 
-#TODO   Importovani pripadnych souboru
-
+# Vyzvani uzivatel k zadani uzivatelskeho jmena a hesla
+# -----------------------------------------------------
 #TODO   Vyzadani si od uzivatele prihlasovaci jmeno a heslo
 
-Username = input('username: ')
-Password = input('password: ')
+username = input('Username: ')
+password = input('Password: ')
 
-#   Registrovani uzivatele
+# Registrovani uzivatele
+# ----------------------
+#TODO   Vytvorit promennou 'registered_users' jako dictationary
 
 """
 +------+-------------+
@@ -25,13 +29,16 @@ Password = input('password: ')
 | liz  |   pass123   |
 +------+-------------+
 """
-#TODO   Vytvorit promennou 'registered_users' jako dictationary
+
 registered_users = {
     'bob': '123',
     'ann': 'pass123',
     'mike': 'password123',
     'liz': 'pass123'
 }
+
+# Zadane texty
+# ------------
 
 TEXTS = [
 '''
@@ -63,6 +70,8 @@ in modern oceans. Other fish such as paddlefish,
 garpike and stingray are also present.'''
 ]
 
+# Kontrola uzivatele a jeho hesla
+# -------------------------------
 #TODO   Zjistit, jestli zadane udaje odpovidaji nekomu z registrovanych
 #       uzivatelu
 #TODO   Pokud je registrovany, pozdrav jej a umozni mu analyzovat texty
@@ -83,8 +92,9 @@ else:
     print('Unregistered user, terminating the program..')
     exit()
 
-#TODO   Vytvorit promennou 'TEXTS', ve ktere budou ulozene jednotlive
-#       texty
+# Uzivatelska volba zadani cisla textu
+# ------------------------------------
+ 
 #TODO   Pokud uzivatel vybere takové cislo textu, ktere neni v zadani,
 #       program jej upozorni a skonci,
 #TODO   Pokud uzivatel zada jiny vstup nez cislo, program jej rovnez
@@ -93,54 +103,83 @@ else:
 text_selection_value = input('Enter a number btw. 1 and 3 to select: ')
 print('----------------------------------------')
 
+# Osetreni, ze zadany znak je cokoli jineho nez cislo a ukonceni programu
 if not text_selection_value.isdigit():
     print('You have not entered a number')
     print('Terminating the program..')
     exit()
-elif int(text_selection_value) not in range(1, 4):
+
+# Osetreni, ze zadany znak je mimo interval <1, 3> a ukonceni programu
+elif int(text_selection_value) not in range(1, 4):  
     print('You have not entered numbers between 1 to 3')
     print('Terminating the program..')
     exit()
 
-text_selected = TEXTS[int(text_selection_value) - 1]
-text_cleaned = list()
-title_words = 0
-upper_words = 0
-lower_words = 0
-digit_words = 0
-digit_sum = 0
-
 # Cyklus pro ocisteni textu
 # -------------------------
-# metoda '.split()' bez deliciho parametru deli slova automaticky podle
+# Metoda '.split()' bez deliciho parametru deli slova automaticky podle
 # mezery
-# ---------------------------------------------------------------------
 # Pomoci metody '.append()' pridavam do promenne 'text_cleaned' retezce
 # znaku orezane pomoci metody '.strip()' o interpunkci ve vetach ',.:;'
+
+text_selected = TEXTS[int(text_selection_value) - 1]
+text_cleaned = list()
 
 for word in text_selected.split():
     text_cleaned.append(
         word.strip(",.:;")
     )
 
-# Cyklus pro praci s jednotlivymi slovy textu
-# -------------------------------------------
+# Cyklus pro vypocet statistik z textu
+# ------------------------------------
+    
+#TODO   Pocet slov
+#TODO   pocet slov zacinajicich velkym pismenem
+#TODO   Pocet slov psanych velkymi pismeny
+#TODO   Pocet slov psanych malymi pismeny
+#TODO   Pocet cisel (ne cifer)
+#TODO   Sumu vsech cisel (ne cifer) v textu
+
+title_words = 0
+upper_words = 0
+lower_words = 0
+digit_words = 0
+digit_sum = 0
+
 # Pouzivam funkci 'enumerate()' pro zaindexovani jednotlivych slov pro
 # jednodussi vypocet poctu slov
 
 for index, word in enumerate(text_cleaned):
-    words_sum = index + 1   # Priradi hodnotu indexu slova do promenne 'words_sum' a pricte 1, protoze indexy zacinaji na indexu 0
-    if word.istitle():      # Zkontroluje, jestli slovo zacina velkym pismenem pomoci metody '.istitle()'
+
+    # Priradi hodnotu indexu slova do promenne 'words_sum' a pricte 1,
+    # protoze indexy zacinaji na indexu 0
+
+    words_sum = index + 1 
+
+    # Zkontroluje, jestli slovo zacina velkym pismenem pomoci metody
+    # '.istitle()'
+
+    if word.istitle():      
         title_words += 1
-    elif word.isupper():    # Zkontroluje, jestli kazdy znak ve slove je velke pismeno pomoci metody '.isupper()'
+    
+    # Zkontroluje, jestli kazdy znak ve slove je velke pismeno pomoci
+    # metody '.isupper()'
+
+    elif word.isupper():    
         upper_words += 1
-    elif word.islower():    # Zkontroluje, jestli kazdy znak ve slove je male pismeno pomoci metody '.islower()'
+
+    # Zkontroluje, jestli kazdy znak ve slove je male pismeno pomoci
+    # metody '.islower()' 
+           
+    elif word.islower():    
         lower_words += 1
-    elif word.isdigit():    # Zkontroluje, jestli je retezec znaku pouze cislo pomoci metody '.isdigit()'
+
+    # Zkontroluje, jestli je retezec znaku pouze cislo pomoci metody
+    # '.isdigit()'
+    elif word.isdigit():    
         digit_words += 1
         digit_sum += int(word)  # Pricte cislo do promenne 'digit_sum'
     
-#TODO   Pocet slov
 print(f'There are {words_sum} words in the selected text.')
 print(f'There are {title_words} titlecase words.')
 print(f'There are {upper_words} uppercase words.')
@@ -148,16 +187,13 @@ print(f'There are {lower_words} lowercase words.')
 print(f'There are {digit_words} numeric strings.')
 print(f'The sum of all the numbers is {digit_sum}.')
 
-#   Pro vybraný text spočítá následující statistiky
+# Graficke zobrazeni cetnosti vsech stejne dlouhych slov
+# ------------------------------------------------------
+#TODO   Vytvorit jednoduchý sloupcovy graf, ktery bude reprezentovat
+#       cetnost ruznych delek slov v textu
 
-
-#TODO   pocet slov zacinajicich velkym pismenem
-#TODO   Pocet slov psanych velkymi pismeny
-#TODO   Pocet slov psanych malymi pismeny
-#TODO   Pocet cisel (ne cifer)
-#TODO   Sumu vsech cisel (ne cifer) v textu
-
-#TODO   Vytvorit jednoduchý sloupcovy graf, ktery bude reprezentovat cetnost ruznych delek slov v textu
+# Pomoci cyklu program ulozi jednotlive delky vsech slov do promenne
+# 'word_length' jako klice a ke kazdemu klici priradi cetnost vyskytu
 
 word_length = dict()
 
@@ -167,28 +203,53 @@ for word_in_text in text_cleaned:
     else:
         word_length[len(word_in_text)] += 1
 
+# Zabezpeceni, ze text 'OCCURENCES' bude vzdy uprostred mezi znaky '|'
+# podle maximalniho poctu vyskytu slov 
+        
 print(f'''----------------------------------------
-LEN|{int((max(word_length.values()) + 2 - 10) / 2) * ' '}OCCURENCES{int((max(word_length.values()) + 2 - 10) / 2) * ' '}|NR.
+LEN|{
+    int((max(word_length.values()) + 2 - 10) / 2) * ' '
+    }OCCURENCES{
+        int((max(word_length.values()) + 2 - 10) / 2) * ' '
+        }|NR.
 ----------------------------------------'''
 )
 
+# Vykresleni jednoducheho grafu, ktery zaroven overuje lichost a sudost
+# maximalniho poctu vyskytu slov a na zaklade vysledku zvoli vykresleni
 if int(max(word_length.values())) % 2 != 0:
     for key, value in sorted(word_length.items()):
         if key <= 9 and value <= 9:
-            print(f"  {key}|{value*'*'}{(max(word_length.values()) - value) * ' '} | {value}")
+            print(f"  {key}|{value*'*'}{
+                (max(word_length.values()) - value) * ' '
+                } | {value}")
         elif key <= 9 and value > 9:
-            print(f"  {key}|{value*'*'}{(max(word_length.values()) - value) * ' '} |{value}")
+            print(f"  {key}|{value*'*'}{
+                (max(word_length.values()) - value) * ' '
+                } |{value}")
         elif key > 9 and value > 9:
-            print(f" {key}|{value*'*'}{(max(word_length.values()) - value) * ' '} |{value}")
+            print(f" {key}|{value*'*'}{
+                (max(word_length.values()) - value) * ' '
+                } |{value}")
         else:
-            print(f" {key}|{value*'*'}{(max(word_length.values()) - value) * ' '} | {value}")
+            print(f" {key}|{value*'*'}{
+                (max(word_length.values()) - value) * ' '
+                } | {value}")
 else:
     for key, value in sorted(word_length.items()):
         if key <= 9 and value <= 9:
-            print(f"  {key}|{value*'*'}{(max(word_length.values()) - value) * ' '}  | {value}")    
+            print(f"  {key}|{value*'*'}{
+                (max(word_length.values()) - value) * ' '
+                }  | {value}")    
         elif key <= 9 and value > 9:
-            print(f"  {key}|{value*'*'}{(max(word_length.values()) - value) * ' '}  |{value}")
+            print(f"  {key}|{value*'*'}{
+                (max(word_length.values()) - value) * ' '
+                }  |{value}")
         elif key > 9 and value > 9:
-            print(f" {key}|{value*'*'}{(max(word_length.values()) - value) * ' '}  |{value}")
+            print(f" {key}|{value*'*'}{
+                (max(word_length.values()) - value) * ' '
+                }  |{value}")
         else:
-            print(f" {key}|{value*'*'}{(max(word_length.values()) - value) * ' '}  | {value}")
+            print(f" {key}|{value*'*'}{
+                (max(word_length.values()) - value) * ' '
+                }  | {value}")

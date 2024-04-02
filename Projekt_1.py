@@ -6,12 +6,12 @@ email: hanys.jan.kubat@gmail.com
 discord: jankubat_13826
 """
 
-#TODO   Naimportovat zadane soubory
+#TODO   Importovani pripadnych souboru
 
 #TODO   Vyzadani si od uzivatele prihlasovaci jmeno a heslo
 
-username = input('username: ')
-password = input('password: ')
+Username = input('username: ')
+Password = input('password: ')
 
 #   Registrovani uzivatele
 
@@ -63,7 +63,8 @@ in modern oceans. Other fish such as paddlefish,
 garpike and stingray are also present.'''
 ]
 
-#TODO   Zjistit, jestli zadane udaje odpovidaji nekomu z registrovanych uzivatelu
+#TODO   Zjistit, jestli zadane udaje odpovidaji nekomu z registrovanych
+#       uzivatelu
 #TODO   Pokud je registrovany, pozdrav jej a umozni mu analyzovat texty
 #TODO   Pokud neni registrovany, upozorni jej a ukonci program
 
@@ -72,7 +73,7 @@ if username in registered_users.keys():
         print(
 '''----------------------------------------
 Welcome to the app, bob
-e have 3 texts to be analyzed.
+We have 3 texts to be analyzed.
 ----------------------------------------'''
         )
     else:
@@ -82,9 +83,12 @@ else:
     print('Unregistered user, terminating the program..')
     exit()
 
-#TODO   Vytvorit promennou 'TEXTS', ve ktere budou ulozene jednotlive texty
-#TODO   Pokud uzivatel vybere takové cislo textu, ktere neni v zadani, program jej upozorni a skonci,
-#TODO   Pokud uzivatel zada jiny vstup nez cislo, program jej rovnez upozorni a skonci
+#TODO   Vytvorit promennou 'TEXTS', ve ktere budou ulozene jednotlive
+#       texty
+#TODO   Pokud uzivatel vybere takové cislo textu, ktere neni v zadani,
+#       program jej upozorni a skonci,
+#TODO   Pokud uzivatel zada jiny vstup nez cislo, program jej rovnez
+#       upozorni a skonci
 
 text_selection_value = input('Enter a number btw. 1 and 3 to select: ')
 print('----------------------------------------')
@@ -107,28 +111,34 @@ digit_words = 0
 digit_sum = 0
 
 # Cyklus pro ocisteni textu
-# metoda '.split()' bez deliciho parametru deli slova automaticky podle mezery
-# Pomoci metody '.append()' pridavam do promenne 'text_cleaned' retezce znaku
-# orezane pomoci metody '.strip()' o interpunkci ve vetach ',.:;'
+# -------------------------
+# metoda '.split()' bez deliciho parametru deli slova automaticky podle
+# mezery
+# ---------------------------------------------------------------------
+# Pomoci metody '.append()' pridavam do promenne 'text_cleaned' retezce
+# znaku orezane pomoci metody '.strip()' o interpunkci ve vetach ',.:;'
+
 for word in text_selected.split():
     text_cleaned.append(
         word.strip(",.:;")
     )
 
 # Cyklus pro praci s jednotlivymi slovy textu
-# Pouzivam funkci 'enumerate()' pro zaindexovani jednotlivych slov pro jednodussi vypocet poctu slov
+# -------------------------------------------
+# Pouzivam funkci 'enumerate()' pro zaindexovani jednotlivych slov pro
+# jednodussi vypocet poctu slov
 
 for index, word in enumerate(text_cleaned):
-    words_sum = index + 1   # Priradi hodnotu indexu slova do promenne 'words_sum' a pricte 1
-    if word.istitle():      # Zkontroluje, jestli slovo zacina velkym pismenem
+    words_sum = index + 1   # Priradi hodnotu indexu slova do promenne 'words_sum' a pricte 1, protoze indexy zacinaji na indexu 0
+    if word.istitle():      # Zkontroluje, jestli slovo zacina velkym pismenem pomoci metody '.istitle()'
         title_words += 1
-    elif word.isupper():    # Zkontroluje, jestli je kazdy znak ve slove je velke pismeno
+    elif word.isupper():    # Zkontroluje, jestli kazdy znak ve slove je velke pismeno pomoci metody '.isupper()'
         upper_words += 1
-    elif word.islower():    # Zkontroluje, jestli je kazdy znak ve slove je male pismeno
+    elif word.islower():    # Zkontroluje, jestli kazdy znak ve slove je male pismeno pomoci metody '.islower()'
         lower_words += 1
-    elif word.isdigit():    # Zkontroluje, jestli je slovo cislo, ale pouze cislo
+    elif word.isdigit():    # Zkontroluje, jestli je retezec znaku pouze cislo pomoci metody '.isdigit()'
         digit_words += 1
-        digit_sum += int(word)
+        digit_sum += int(word)  # Pricte cislo do promenne 'digit_sum'
     
 #TODO   Pocet slov
 print(f'There are {words_sum} words in the selected text.')
@@ -149,3 +159,36 @@ print(f'The sum of all the numbers is {digit_sum}.')
 
 #TODO   Vytvorit jednoduchý sloupcovy graf, ktery bude reprezentovat cetnost ruznych delek slov v textu
 
+word_length = dict()
+
+for word_in_text in text_cleaned:
+    if len(word_in_text) not in word_length:
+        word_length[len(word_in_text)] = 1
+    else:
+        word_length[len(word_in_text)] += 1
+
+print(f'''----------------------------------------
+LEN|{int((max(word_length.values()) + 2 - 10) / 2) * ' '}OCCURENCES{int((max(word_length.values()) + 2 - 10) / 2) * ' '}|NR.
+----------------------------------------'''
+)
+
+if int(max(word_length.values())) % 2 != 0:
+    for key, value in sorted(word_length.items()):
+        if key <= 9 and value <= 9:
+            print(f"  {key}|{value*'*'}{(max(word_length.values()) - value) * ' '} | {value}")
+        elif key <= 9 and value > 9:
+            print(f"  {key}|{value*'*'}{(max(word_length.values()) - value) * ' '} |{value}")
+        elif key > 9 and value > 9:
+            print(f" {key}|{value*'*'}{(max(word_length.values()) - value) * ' '} |{value}")
+        else:
+            print(f" {key}|{value*'*'}{(max(word_length.values()) - value) * ' '} | {value}")
+else:
+    for key, value in sorted(word_length.items()):
+        if key <= 9 and value <= 9:
+            print(f"  {key}|{value*'*'}{(max(word_length.values()) - value) * ' '}  | {value}")    
+        elif key <= 9 and value > 9:
+            print(f"  {key}|{value*'*'}{(max(word_length.values()) - value) * ' '}  |{value}")
+        elif key > 9 and value > 9:
+            print(f" {key}|{value*'*'}{(max(word_length.values()) - value) * ' '}  |{value}")
+        else:
+            print(f" {key}|{value*'*'}{(max(word_length.values()) - value) * ' '}  | {value}")
